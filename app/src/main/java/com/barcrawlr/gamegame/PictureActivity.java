@@ -34,15 +34,9 @@ import io.realm.RealmObject;
 public class PictureActivity extends AppCompatActivity {
 
     private ImageButton imageButton;
-    private View view;
-    private Button sendButton;
-
-    private byte[] byteArray;
     private Realm realm;
     TextView textTargetUri;
-    ImageView targetImage;
     private Button buttonLoadImage;
-    private TextView getTextTargetUri;
     private Bitmap bitmap;
 
     @Override
@@ -59,7 +53,6 @@ public class PictureActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                // TODO Auto-generated method stub
                 Intent intent = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 0);
@@ -92,10 +85,8 @@ public class PictureActivity extends AppCompatActivity {
                 textTargetUri.setText(targetUri.toString());
                 try {
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
-                    //targetImage.setImageBitmap(bitmap);
-                } catch (FileNotFoundException e) {
 
-                }
+                } catch (FileNotFoundException e) { }
             }
 
             realm.executeTransaction(new Realm.Transaction() {

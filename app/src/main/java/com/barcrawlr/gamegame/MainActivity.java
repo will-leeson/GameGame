@@ -16,9 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Button selectImage;
     private Button play;
-    private Context context;
-    private View view;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +23,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         selectImage = findViewById(R.id.selectImage);
         play = findViewById(R.id.play);
-       // final MainActivity mainActivity =  (MainActivity) this;
-        // final SendActivity sendActivity = new SendActivity();
-
-
-        // RealmConfiguration config = new RealmConfiguration.Builder(context).build();
-        //Realm.setDefaultConfiguration(config);
         final Realm realm = Realm.getDefaultInstance();
 
         selectImage.setOnClickListener(new View.OnClickListener() {
@@ -46,10 +37,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final RealmResults<Picture> pictures = realm.where(Picture.class).findAll();
-                pictures.first().getImage();
-                final Picture pic = pictures.last();
-                pic.getImage();
-
 
                 Intent intent = new Intent(v.getContext(), PlayActivity.class);
                 intent.putExtra("Pic", pictures.last().getImage());
