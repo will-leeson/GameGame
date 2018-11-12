@@ -27,7 +27,7 @@ public class PlayActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.targetimage);
         word = (EditText) findViewById(R.id.enterWord);
         submit = (Button) findViewById(R.id.submit);
-       final Realm realm = Realm.getDefaultInstance();
+        final Realm realm = Realm.getDefaultInstance();
         byte[] picture = getIntent().getExtras().getByteArray("Pic");
         final RealmResults<Picture> pictures = realm.where(Picture.class).findAll();
 
@@ -43,15 +43,13 @@ public class PlayActivity extends AppCompatActivity {
                 realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                com.barcrawlr.gamegame.Picture pictureObject = new com.barcrawlr.gamegame.Picture();
-
                 pictures.last().setWord(word.getText().toString());
                 Intent intent = new Intent(getBaseContext(), ChooseWinnerActivity.class);
                 intent.putExtra("Word", pictures.last().getWord());
                 //The line under this comment is a place holder. We will need three iterations depending on the player/the players turn
                 //what I am testing now if the word can be sent to the first player on a page where they can then vote who wins
                 intent.putExtra("PicPlayer2", pictures.last().getImage());
-                realm.copyToRealm(pictureObject);
+                realm.copyToRealm(pictures);
                 finish();
                 startActivity(intent);
             }

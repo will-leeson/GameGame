@@ -51,7 +51,7 @@ public class ChooseWinnerActivity extends AppCompatActivity {
                     @Override
                     public void execute(Realm realm) {
                         if (chooseWinner.isChecked() == true) {
-                            realmResults.last().setScore(1);
+                            realmResults.last().setScore(+1);
                             Intent intent = new Intent(getBaseContext(), LeaderboardActivity.class);
                            // intent.putExtra("Word", word);
                             intent.putExtra("Score", realmResults.last().getScore());
