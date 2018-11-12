@@ -7,6 +7,15 @@ public class Picture extends RealmObject {
     // @PrimaryKey
     // private String id;
     private byte[] image;
+    private String word;
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
 
     /**  public String getId() {
      return id;
