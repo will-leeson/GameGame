@@ -27,10 +27,10 @@ public class PlayActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.targetimage);
         word = (EditText) findViewById(R.id.enterWord);
         submit = (Button) findViewById(R.id.submit);
-        final Realm realm = Realm.getDefaultInstance();
-        byte[] picture = getIntent().getExtras().getByteArray("Pic");
-        final RealmResults<Picture> pictures = realm.where(Picture.class).findAll();
 
+        final Realm realm = Realm.getDefaultInstance();
+        final RealmResults<Picture> pictures = realm.where(Picture.class).findAll();
+        byte[] picture = getIntent().getExtras().getByteArray("Pic");
 
         commonFunctions.printImage(picture, imageView);
 

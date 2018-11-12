@@ -48,7 +48,6 @@ public class PictureActivity extends AppCompatActivity {
         buttonLoadImage = findViewById(R.id.loadimage);
         textTargetUri = (TextView) findViewById(R.id.targeturi);
 
-
         buttonLoadImage.setOnClickListener(new Button.OnClickListener() {
 
             @Override
@@ -58,7 +57,6 @@ public class PictureActivity extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         });
-
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override

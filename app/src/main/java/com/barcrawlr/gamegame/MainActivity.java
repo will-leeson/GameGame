@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         selectImage = findViewById(R.id.selectImage);
         play = findViewById(R.id.play);
+
         final Realm realm = Realm.getDefaultInstance();
 
         selectImage.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

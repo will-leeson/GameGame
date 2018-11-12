@@ -24,14 +24,14 @@ public class ChooseWinnerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_winner);
-        imageView = (ImageView) findViewById(R.id.lastImage);
 
+        imageView = (ImageView) findViewById(R.id.lastImage);
         chooseWinner = (CheckBox) findViewById(R.id.chooseWinner);
         submitWinner = (Button) findViewById(R.id.submitWinner);
         wordGuessed = (TextView) findViewById(R.id.wordGuessed);
+
         final Realm realm = Realm.getDefaultInstance();
         final RealmResults<Picture> realmResults = realm.where(Picture.class).findAll();
-
         byte[] picture = getIntent().getExtras().getByteArray("PicPlayer2");
 
         commonFunctions.printImage(picture, imageView);
@@ -57,11 +57,8 @@ public class ChooseWinnerActivity extends AppCompatActivity {
                             realm.copyToRealm(realmResults);
                             finish();
                             startActivity(intent);
-
                         }
                     }
-
-
                 });
             }
         });
