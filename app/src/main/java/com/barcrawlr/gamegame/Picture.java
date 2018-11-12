@@ -8,6 +8,15 @@ public class Picture extends RealmObject {
     // private String id;
     private byte[] image;
     private String word;
+    private int score;
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public String getWord() {
         return word;

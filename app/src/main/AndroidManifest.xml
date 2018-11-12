@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".PictureActivity" />
         <activity android:name=".PlayActivity" />
-        <activity android:name=".ChooseWinnerActivity"></activity>
+        <activity android:name=".ChooseWinnerActivity" />
+        <activity android:name=".LeaderboardActivity"></activity>
     </application>
 
 </manifest>

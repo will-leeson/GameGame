@@ -50,7 +50,7 @@ public class PlayActivity extends AppCompatActivity {
                 intent.putExtra("Word", pictures.last().getWord());
                 //The line under this comment is a place holder. We will need three iterations depending on the player/the players turn
                 //what I am testing now if the word can be sent to the first player on a page where they can then vote who wins
-                intent.putExtra("PicPlayer2",pictures.last().getImage());
+                intent.putExtra("PicPlayer2", pictures.last().getImage());
                 realm.copyToRealm(pictureObject);
                 finish();
                 startActivity(intent);

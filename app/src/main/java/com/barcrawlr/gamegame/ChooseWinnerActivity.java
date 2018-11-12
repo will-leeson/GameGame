@@ -30,6 +30,8 @@ public class ChooseWinnerActivity extends AppCompatActivity {
         submitWinner = (Button) findViewById(R.id.submitWinner);
         wordGuessed = (TextView) findViewById(R.id.wordGuessed);
         final Realm realm = Realm.getDefaultInstance();
+        final RealmResults<Picture> realmResults = realm.where(Picture.class).findAll();
+
         byte[] picture = getIntent().getExtras().getByteArray("PicPlayer2");
         if (picture != null) {
             Bitmap bmp = BitmapFactory.decodeByteArray(picture, 0, picture.length);
@@ -41,14 +43,28 @@ public class ChooseWinnerActivity extends AppCompatActivity {
         submitWinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (chooseWinner.isChecked()==true){
-                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                    intent.putExtra("Word", word);
-                    startActivity(intent);
+                //for when we have implemented three iterations, we will have to check which box was checked...
+                //player 1, 2, or 3. With if statements it will send different information via intents to the leaderboardactivity
+                //depending on which is sent, the appropriate player will be awarded...
+                //we will also send the picture of the drawing that won, maybe? It could be an optioin
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        if (chooseWinner.isChecked() == true) {
+                            realmResults.last().setScore(1);
+                            Intent intent = new Intent(getBaseContext(), LeaderboardActivity.class);
+                           // intent.putExtra("Word", word);
+                            intent.putExtra("Score", realmResults.last().getScore());
+                            realm.copyToRealm(realmResults);
+                            finish();
+                            startActivity(intent);
 
-                }
+                        }
+                    }
+
+
+                });
             }
-
-
-    });
-}}
+        });
+    }
+}

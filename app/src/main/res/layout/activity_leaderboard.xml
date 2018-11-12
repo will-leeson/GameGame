@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LeaderboardActivity">
+
+    <LinearLayout
+        android:id="@+id/leaderboard"
+        android:layout_width="208dp"
+        android:layout_height="252dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/player1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:hint="Player1" />
+
+        <TextView
+            android:id="@+id/player2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:hint="Player2" />
+
+        <TextView
+            android:id="@+id/player3"
+            android:layout_width="285dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="top"
+            android:hint="Player3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/scores"
+        android:layout_width="152dp"
+        android:layout_height="253dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.913"
+        app:layout_constraintStart_toEndOf="@+id/leaderboard"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/player1Score"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:hint="Player1Score" />
+
+        <TextView
+            android:id="@+id/player2Score"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:hint="Player2Score" />
+
+        <TextView
+            android:id="@+id/player3Score"
+            android:layout_width="285dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="top"
+            android:hint="Player3Score" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
