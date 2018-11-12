@@ -33,10 +33,9 @@ public class ChooseWinnerActivity extends AppCompatActivity {
         final RealmResults<Picture> realmResults = realm.where(Picture.class).findAll();
 
         byte[] picture = getIntent().getExtras().getByteArray("PicPlayer2");
-        if (picture != null) {
-            Bitmap bmp = BitmapFactory.decodeByteArray(picture, 0, picture.length);
-            imageView.setImageBitmap(bmp);
-        }
+
+        commonFunctions.printImage(picture, imageView);
+
         final String word = getIntent().getStringExtra("Word");
         wordGuessed.setText(word);
 

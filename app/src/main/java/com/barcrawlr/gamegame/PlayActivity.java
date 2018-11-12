@@ -31,10 +31,8 @@ public class PlayActivity extends AppCompatActivity {
         byte[] picture = getIntent().getExtras().getByteArray("Pic");
         final RealmResults<Picture> pictures = realm.where(Picture.class).findAll();
 
-        if (picture != null) {
-            Bitmap bmp = BitmapFactory.decodeByteArray(picture, 0, picture.length);
-            imageView.setImageBitmap(bmp);
-        }
+
+        commonFunctions.printImage(picture, imageView);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
