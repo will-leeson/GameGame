@@ -2,6 +2,7 @@ package com.barcrawlr.gamegame;
 
 import android.content.Context;
 import android.content.Intent;
+import android.se.omapi.Session;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+//import java.lang.Object.realm.Session;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,10 +41,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final RealmResults<Picture> pictures = realm.where(Picture.class).findAll();
-              //  final RealmResults<User> users = realm.where(User.class).findAll();
+               final RealmResults<User> users = realm.where(User.class).findAll();
+               realm.beginTransaction();
                // users.get(User.getId());
                // User user = new User();
             //    User sendingUser = users.get(User.getId());
+                RealmQuery<User> query = realm.where(User.class);
+               // query.contains("id", User.getId());
+               // query.equalTo("id", Session);
+               // RealmResults<User> result1 = query.findAll();
+               // users.where().equalTo("id", Session)
                 //RealmQuery pictureTest = pictures.where().equalTo("sendingUser", User.getId());
               //  String bytes = pictureTest.toString();
                // pictures.last(Picture.id);
@@ -52,10 +60,13 @@ public class MainActivity extends AppCompatActivity {
             //    byte[] pictureTest = pictures.get(users.get(User.getId()).getNewId()).getImage();
               //  int newId =users.get(User.getId()).getNewId();
             //    pictures.get(User.getId())
-                int Test=GameApplication.getPictureId();
+                int Test=Picture.getPicId();
 
               //  intent.putExtra("Pic", pictures.where().equalTo("sendingUser", User.getId(
-                intent.putExtra("Pic", pictures.get(GameApplication.getPictureId()).getImage());
+                intent.putExtra("Pic", pictures.get(Picture.getPicId()).getImage());
+                intent.putExtra("Pic#", GameApplication.getPictureId());
+                realm.commitTransaction();
+                realm.close();
                 startActivity(intent);
             }
         });

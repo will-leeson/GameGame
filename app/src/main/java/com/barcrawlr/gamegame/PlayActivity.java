@@ -26,6 +26,7 @@ public class PlayActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.targetimage);
         word = (EditText) findViewById(R.id.enterWord);
         submit = (Button) findViewById(R.id.submit);
+       // Realm picSender = Realm.getDefaultInstance();
 
 
         final Realm realm = Realm.getDefaultInstance();
@@ -33,7 +34,8 @@ public class PlayActivity extends AppCompatActivity {
         //String sendingUser = user.get(0).getId();
         final RealmResults<Picture> pictures = realm.where(Picture.class).findAll();
        // pictures.get(sendingUser)
-        byte[] picture = getIntent().getExtras().getByteArray("Pic");
+       final byte[] picture = getIntent().getExtras().getByteArray("Pic");
+       final int pictureNumber = getIntent().getExtras().getInt("Pic#");
        // pictures.get(user.get(0).getId()).setId(user.get(0).getId());
 
         commonFunctions.printImage(picture, imageView);
@@ -46,15 +48,18 @@ public class PlayActivity extends AppCompatActivity {
                 realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                pictures.last().setWord(word.getText().toString());
+                pictures.get(pictureNumber).setWord(word.getText().toString());
+                pictures.get(pictureNumber).setId(pictureNumber);
+
              //   user.setId("asdfasf");
                 //pictures.last().setId();
                 Intent intent = new Intent(getBaseContext(), ChooseWinnerActivity.class);
-                intent.putExtra("Word", pictures.get(GameApplication.getPictureId()).getWord());
+                intent.putExtra("Word", word.getText().toString());
                 //The line under this comment is a place holder. We will need three iterations depending on the player/the players turn
                 //what I am testing now if the word can be sent to the first player on a page where they can then vote who wins
-                intent.putExtra("PicPlayer2", pictures.get(GameApplication.getPictureId()).getImage());
+                intent.putExtra("PicPlayer2", pictures.get(pictureNumber).getImage());
                 realm.copyToRealm(pictures);
+                realm.commitTransaction();
                 finish();
                 startActivity(intent);
             }

@@ -110,7 +110,7 @@ public class PictureActivity extends AppCompatActivity {
                         picture.setImage(byteArray);
                         user.setId(24231);
 
-                        picture.setId(GameApplication.setPictureId());
+                        picture.setPicId();
 
                         realm.copyToRealm(user);
                         realm.copyToRealm(picture);
