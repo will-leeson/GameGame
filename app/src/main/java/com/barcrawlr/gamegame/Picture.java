@@ -7,12 +7,12 @@ public class Picture extends RealmObject {
 
 
     //@PrimaryKey
-   private int id;
+   private static int id;
    // private Id
     private byte[] image;
     private String word;
     private int score;
-    public int getId() {
+    public static int getId() {
         return id;
     }
 

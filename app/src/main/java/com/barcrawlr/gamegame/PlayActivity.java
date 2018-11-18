@@ -34,14 +34,15 @@ public class PlayActivity extends AppCompatActivity {
         final RealmResults<Picture> pictures = realm.where(Picture.class).findAll();
        // pictures.get(sendingUser)
         byte[] picture = getIntent().getExtras().getByteArray("Pic");
-        //void sendingUser = pictures.get(user.get(0).getId()).setId(user.get(0).getId());
+       // pictures.get(user.get(0).getId()).setId(user.get(0).getId());
 
         commonFunctions.printImage(picture, imageView);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final User user = new User();
+                //final User user = new User();
+               // user.get(User.getId());
                 realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -49,10 +50,10 @@ public class PlayActivity extends AppCompatActivity {
              //   user.setId("asdfasf");
                 //pictures.last().setId();
                 Intent intent = new Intent(getBaseContext(), ChooseWinnerActivity.class);
-                intent.putExtra("Word", pictures.get(user.getId()).getWord());
+                intent.putExtra("Word", pictures.get(GameApplication.getPictureId()).getWord());
                 //The line under this comment is a place holder. We will need three iterations depending on the player/the players turn
                 //what I am testing now if the word can be sent to the first player on a page where they can then vote who wins
-                intent.putExtra("PicPlayer2", pictures.get(user.getId()).getImage());
+                intent.putExtra("PicPlayer2", pictures.get(GameApplication.getPictureId()).getImage());
                 realm.copyToRealm(pictures);
                 finish();
                 startActivity(intent);

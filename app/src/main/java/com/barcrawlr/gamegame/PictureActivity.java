@@ -26,6 +26,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
 
 public class PictureActivity extends AppCompatActivity {
 
@@ -65,6 +66,7 @@ public class PictureActivity extends AppCompatActivity {
             }
         });
     }
+   // final RealmResults<com.barcrawlr.gamegame.Picture> pictures = realm.where(com.barcrawlr.gamegame.Picture.class).findAll();
 
     @Override
     protected void onActivityResult(final int requestCode, int resultCode, Intent data) {
@@ -107,8 +109,12 @@ public class PictureActivity extends AppCompatActivity {
                         //bitmap.recycle();
                         picture.setImage(byteArray);
                         user.setId(24231);
+
+                        picture.setId(GameApplication.setPictureId());
+
                         realm.copyToRealm(user);
                         realm.copyToRealm(picture);
+                      //  GameApplication.setPictureId();
                         finish();
                        /** Intent intent = new Intent(getBaseContext(), TestRetriv.class);
                         intent.putExtra("Pic", picture.getImage());

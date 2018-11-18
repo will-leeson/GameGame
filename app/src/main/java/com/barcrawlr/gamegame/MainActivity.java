@@ -9,6 +9,7 @@ import android.widget.Button;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,9 +39,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final RealmResults<Picture> pictures = realm.where(Picture.class).findAll();
-
+              //  final RealmResults<User> users = realm.where(User.class).findAll();
+               // users.get(User.getId());
+               // User user = new User();
+            //    User sendingUser = users.get(User.getId());
+                //RealmQuery pictureTest = pictures.where().equalTo("sendingUser", User.getId());
+              //  String bytes = pictureTest.toString();
+               // pictures.last(Picture.id);
+             //   pictures.get(Picture.getId());
+                int usertest = User.getId();
                 Intent intent = new Intent(v.getContext(), PlayActivity.class);
-                intent.putExtra("Pic", pictures.last().getImage());
+            //    byte[] pictureTest = pictures.get(users.get(User.getId()).getNewId()).getImage();
+              //  int newId =users.get(User.getId()).getNewId();
+            //    pictures.get(User.getId())
+                int Test=GameApplication.getPictureId();
+
+              //  intent.putExtra("Pic", pictures.where().equalTo("sendingUser", User.getId(
+                intent.putExtra("Pic", pictures.get(GameApplication.getPictureId()).getImage());
                 startActivity(intent);
             }
         });

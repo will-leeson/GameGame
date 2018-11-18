@@ -4,9 +4,18 @@ import io.realm.RealmObject;
 
 public class User extends RealmObject {
 
-    private int id;
+    private static int id;
+    private int newId;
 
-    public int getId() {
+    public static int getNewId() {
+        return getId();
+    }
+
+    public void setNewId(int newId) {
+        this.newId = newId;
+    }
+
+    public static int getId() {
         return id;
     }
 
