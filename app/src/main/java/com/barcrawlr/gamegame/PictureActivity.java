@@ -11,10 +11,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -25,9 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import org.w3c.dom.Text;
-
 import io.realm.Realm;
 import io.realm.RealmObject;
 
@@ -38,6 +34,7 @@ public class PictureActivity extends AppCompatActivity {
     TextView textTargetUri;
     private Button buttonLoadImage;
     private Bitmap bitmap;
+    //private Button imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +74,8 @@ public class PictureActivity extends AppCompatActivity {
             if (requestCode == 1) {
                 Bundle extras = data.getExtras();
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
-                imageButton.setImageBitmap(imageBitmap);
+
+               imageButton.setImageBitmap(imageBitmap);
             } else if (requestCode == 0) {
                 final Uri targetUri = data.getData();
                 textTargetUri.setText(targetUri.toString());
@@ -91,13 +89,15 @@ public class PictureActivity extends AppCompatActivity {
                 @Override
                 public void execute(Realm realm) {
                     com.barcrawlr.gamegame.Picture picture = new com.barcrawlr.gamegame.Picture();
-
+                    User user = new User();
                     if (requestCode == 1) {
-                        BitmapDrawable image = (BitmapDrawable) imageButton.getDrawable();
+                       BitmapDrawable image = (BitmapDrawable) imageButton.getDrawable();
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         image.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] imageInByte = baos.toByteArray();
                         picture.setImage(imageInByte);
+                        user.setId(242341);
+                        realm.copyFromRealm(user);
                         realm.copyToRealm(picture);
                         finish();
                     } else if (requestCode == 0) {
@@ -106,6 +106,8 @@ public class PictureActivity extends AppCompatActivity {
                         byte[] byteArray = stream.toByteArray();
                         //bitmap.recycle();
                         picture.setImage(byteArray);
+                        user.setId(24231);
+                        realm.copyToRealm(user);
                         realm.copyToRealm(picture);
                         finish();
                        /** Intent intent = new Intent(getBaseContext(), TestRetriv.class);

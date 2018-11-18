@@ -12,5 +12,4 @@ public class commonFunctions {
             imageView.setImageBitmap(bmp);
         }
     }
-
 }

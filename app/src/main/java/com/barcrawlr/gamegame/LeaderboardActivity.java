@@ -11,6 +11,7 @@ public class LeaderboardActivity extends AppCompatActivity {
     private LinearLayout scores;
     private TextView playerOne;
     private TextView playerOneScore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +23,6 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         int score = getIntent().getExtras().getInt("Score");
         playerOneScore.setText(String.valueOf(score));
-
-
 
     }
 }

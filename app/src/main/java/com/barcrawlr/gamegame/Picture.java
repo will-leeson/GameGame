@@ -4,12 +4,21 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class Picture extends RealmObject {
-    // @PrimaryKey
-    // private String id;
+
+
+    //@PrimaryKey
+   private int id;
+   // private Id
     private byte[] image;
     private String word;
     private int score;
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public int getScore() {
         return score;
     }
