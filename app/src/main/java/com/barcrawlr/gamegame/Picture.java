@@ -8,8 +8,7 @@ public class Picture extends RealmObject {
 
     //@PrimaryKey
     private static int picId =-1;
-   private static int id;
-   // private Id
+    private static int id;
     private byte[] image;
     private String word;
     private int score;
@@ -46,14 +45,6 @@ public class Picture extends RealmObject {
         this.word = word;
     }
 
-    /**  public String getId() {
-     return id;
-     }
-
-     public void setId(String id) {
-     this.id = id;
-     }
-     **/
     public byte[] getImage() {
         return image;
     }

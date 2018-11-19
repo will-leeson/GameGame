@@ -35,7 +35,6 @@ public class PictureActivity extends AppCompatActivity {
     TextView textTargetUri;
     private Button buttonLoadImage;
     private Bitmap bitmap;
-    //private Button imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +65,6 @@ public class PictureActivity extends AppCompatActivity {
             }
         });
     }
-   // final RealmResults<com.barcrawlr.gamegame.Picture> pictures = realm.where(com.barcrawlr.gamegame.Picture.class).findAll();
 
     @Override
     protected void onActivityResult(final int requestCode, int resultCode, Intent data) {
@@ -114,7 +112,6 @@ public class PictureActivity extends AppCompatActivity {
 
                         realm.copyToRealm(user);
                         realm.copyToRealm(picture);
-                      //  GameApplication.setPictureId();
                         finish();
                        /** Intent intent = new Intent(getBaseContext(), TestRetriv.class);
                         intent.putExtra("Pic", picture.getImage());
