@@ -26,7 +26,9 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import java.util.Random;
 
 public class PictureActivity extends AppCompatActivity {
 
@@ -35,6 +37,7 @@ public class PictureActivity extends AppCompatActivity {
     TextView textTargetUri;
     private Button buttonLoadImage;
     private Bitmap bitmap;
+    private Random rand = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class PictureActivity extends AppCompatActivity {
         imageButton = findViewById(R.id.imageButton);
         buttonLoadImage = findViewById(R.id.loadimage);
         textTargetUri = (TextView) findViewById(R.id.targeturi);
+        final Random rand = new Random();
 
         buttonLoadImage.setOnClickListener(new Button.OnClickListener() {
 
@@ -71,6 +75,7 @@ public class PictureActivity extends AppCompatActivity {
         PictureActivity.super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 || requestCode == 0 && resultCode == RESULT_OK) {
 
+            final int gameIdGenerator = rand.nextInt(1049231) + 1;
             if (requestCode == 1) {
                 Bundle extras = data.getExtras();
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
@@ -89,15 +94,27 @@ public class PictureActivity extends AppCompatActivity {
                 @Override
                 public void execute(Realm realm) {
                     com.barcrawlr.gamegame.Picture picture = new com.barcrawlr.gamegame.Picture();
-                    User user = new User();
+                    final RealmResults<User> users = realm.where(User.class).findAll();
+                    final RealmResults<Game> newGame = realm.where(Game.class).findAll();
+
+
+                    Game newGameId = new Game();
                     if (requestCode == 1) {
                        BitmapDrawable image = (BitmapDrawable) imageButton.getDrawable();
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         image.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] imageInByte = baos.toByteArray();
                         picture.setImage(imageInByte);
-                        user.setId(242341);
-                        realm.copyFromRealm(user);
+                        while(!newGame.contains(gameIdGenerator) ){
+                            newGameId.setId(gameIdGenerator);
+                            if (!newGame.contains(gameIdGenerator)){
+                                break;
+                            }
+                        }
+                        //user.setId(242341);
+                      //  realm.copyFromRealm(user);
+                        picture.setPicId();
+                        realm.copyToRealm(newGameId);
                         realm.copyToRealm(picture);
                         finish();
                     } else if (requestCode == 0) {
@@ -106,11 +123,18 @@ public class PictureActivity extends AppCompatActivity {
                         byte[] byteArray = stream.toByteArray();
                         //bitmap.recycle();
                         picture.setImage(byteArray);
-                        user.setId(24231);
+
+
+                        while(!newGame.contains(gameIdGenerator) ){
+                            newGameId.setId(gameIdGenerator);
+                            if (!newGame.contains(gameIdGenerator)){
+                                break;
+                            }
+                        }
 
                         picture.setPicId();
 
-                        realm.copyToRealm(user);
+                        realm.copyToRealm(newGameId);
                         realm.copyToRealm(picture);
                         finish();
                        /** Intent intent = new Intent(getBaseContext(), TestRetriv.class);

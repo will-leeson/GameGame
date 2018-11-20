@@ -28,15 +28,11 @@ public class PlayActivity extends AppCompatActivity {
         submit = (Button) findViewById(R.id.submit);
        // Realm picSender = Realm.getDefaultInstance();
 
-
         final Realm realm = Realm.getDefaultInstance();
         final RealmResults<User> user = realm.where(User.class).findAll();
-        //String sendingUser = user.get(0).getId();
         final RealmResults<Picture> pictures = realm.where(Picture.class).findAll();
-       // pictures.get(sendingUser)
-       final byte[] picture = getIntent().getExtras().getByteArray("Pic");
-       final int pictureNumber = getIntent().getExtras().getInt("Pic#");
-       // pictures.get(user.get(0).getId()).setId(user.get(0).getId());
+        final byte[] picture = getIntent().getExtras().getByteArray("Pic");
+        final int pictureNumber = getIntent().getExtras().getInt("Pic#");
 
         commonFunctions.printImage(picture, imageView);
 
