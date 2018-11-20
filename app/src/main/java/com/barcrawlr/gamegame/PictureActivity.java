@@ -146,7 +146,7 @@ public class PictureActivity extends AppCompatActivity {
                         else{
                             newGameId.setId(gameIdGenerator);
                         }
-
+                        int testcommit = 0;
                         picture.setPicId();
 
                         realm.copyToRealm(newGameId);
