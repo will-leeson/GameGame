@@ -1,12 +1,14 @@
 package com.barcrawlr.gamegame;
 
+import android.service.autofill.FillEventHistory;
+
 import io.realm.RealmModel;
 import io.realm.RealmObject;
 
 
 public class Game extends RealmObject {
 
-    private static int id;
+    private int id;
 
     private String emptyConstructor;
 
@@ -18,11 +20,11 @@ public class Game extends RealmObject {
         this.emptyConstructor = emptyConstructor;
     }
 
-    public static int getId() {
+    public  int getId() {
         return id;
     }
 
     public void setId(int id) {
-        Game.id = id;
+        this.id = id;
     }
 }
