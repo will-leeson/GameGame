@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".FirstRoundActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,10 @@
         <activity android:name=".PictureActivity" />
         <activity android:name=".PlayActivity" />
         <activity android:name=".ChooseWinnerActivity" />
-        <activity android:name=".LeaderboardActivity"></activity>
+        <activity android:name=".LeaderboardActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".DrawRoundActivity" />
+        <activity android:name=".GuessRoundActivity"></activity>
     </application>
 
 </manifest>
