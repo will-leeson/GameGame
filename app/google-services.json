@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "771658265187",
+    "firebase_url": "https://gamegame-8a873.firebaseio.com",
+    "project_id": "gamegame-8a873",
+    "storage_bucket": "gamegame-8a873.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771658265187:android:cbff1e7cfa45d3a9",
+        "android_client_info": {
+          "package_name": "com.barcrawlr.gamegame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771658265187-3bjt63052lk0tq0c5agdevl0cop3k6o5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.barcrawlr.gamegame",
+            "certificate_hash": "21e29e3ba82ae7dc9b6101bf964b3b63c8a27b40"
+          }
+        },
+        {
+          "client_id": "771658265187-hhuqtca3okgd2kthp9k4opgs6i7kk43r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMjEHhFPMBWZYRxdneTciCkvjMuf9_g7w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771658265187-hhuqtca3okgd2kthp9k4opgs6i7kk43r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
