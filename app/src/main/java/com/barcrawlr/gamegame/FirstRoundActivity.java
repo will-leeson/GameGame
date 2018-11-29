@@ -1,20 +1,16 @@
 package com.barcrawlr.gamegame;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -49,18 +45,24 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
         answer = (EditText) findViewById(R.id.answerText);
         choosenImage = (ImageView) findViewById(R.id.choosenImage);
         saveImage = (Button) findViewById(R.id.saveImage1);
-
+        final byte[] picture = getIntent().getExtras().getByteArray("Pic");
+//        BitmapFactory.de
         saveImage.setOnClickListener(this);
         choosenImage.setOnClickListener(this);
         choosenImage.setOnTouchListener(this);
 
         BitmapFactory.Options opt = new BitmapFactory.Options();
+
         opt.inScaled = true;
         opt.inMutable = true;
-        bmp = BitmapFactory.decodeResource(this.getResources(),
-                R.drawable.bg, opt);
+        //bmp = BitmapFactory.decodeResource(this.getResources(),
+          //      R.drawable.bg, opt);
+        bmp = BitmapFactory.decodeByteArray(picture, 0, picture.length, opt);
+        //commonFunctions.printImage(picture, choosenImage, true);
         choosenImage.setImageBitmap(bmp);
         canvas = new Canvas(bmp);
+       // canvas =         commonFunctions.printImage(picture, choosenImage, true);
+
         paint = new Paint();
         paint.setColor(Color.BLUE);
         paint.setStrokeWidth(5);

@@ -1,15 +1,14 @@
 package com.barcrawlr.gamegame;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -33,7 +32,7 @@ public class ChooseWinnerActivity extends AppCompatActivity {
         final RealmResults<Picture> realmResults = realm.where(Picture.class).findAll();
         byte[] picture = getIntent().getExtras().getByteArray("PicPlayer2");
 
-        commonFunctions.printImage(picture, imageView);
+        commonFunctions.printImage(picture, imageView, false);
 
         final String word = getIntent().getStringExtra("Word");
         wordGuessed.setText(word);

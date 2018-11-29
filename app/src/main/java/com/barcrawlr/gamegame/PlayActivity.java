@@ -1,15 +1,13 @@
 package com.barcrawlr.gamegame;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -34,7 +32,7 @@ public class PlayActivity extends AppCompatActivity {
         final byte[] picture = getIntent().getExtras().getByteArray("Pic");
         final int pictureNumber = getIntent().getExtras().getInt("Pic#");
 
-        commonFunctions.printImage(picture, imageView);
+        commonFunctions.printImage(picture, imageView, false);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
