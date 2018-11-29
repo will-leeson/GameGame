@@ -8,6 +8,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -49,9 +52,20 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
 
         saveImage.setOnClickListener(this);
         choosenImage.setOnClickListener(this);
+        choosenImage.setOnTouchListener(this);
+
+        BitmapFactory.Options opt = new BitmapFactory.Options();
+        opt.inScaled = true;
+        opt.inMutable = true;
+        bmp = BitmapFactory.decodeResource(this.getResources(),
+                R.drawable.bg, opt);
+        choosenImage.setImageBitmap(bmp);
+        canvas = new Canvas(bmp);
+        paint = new Paint();
+        paint.setColor(Color.BLUE);
+        paint.setStrokeWidth(5);
+        matrix = new Matrix();
     }
-
-
 
     public void onClick(View v){
         if(v == saveImage){
@@ -68,33 +82,6 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
                 } catch (Exception e) {
                     Log.v("Exception", e.getMessage());
                 }
-            }
-        }
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent intent){
-        super.onActivityResult(requestCode, resultCode, intent);
-
-        if(requestCode == RESULT_OK){
-            Uri imageFileUri = intent.getData();
-            try{
-                BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
-                bmpFactoryOptions.inJustDecodeBounds = true;
-                bmp = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageFileUri), null, bmpFactoryOptions);
-                alteredBitmap = Bitmap.createBitmap(bmp.getWidth(), bmp.getHeight(),bmp.getConfig());
-                canvas = new Canvas(alteredBitmap);
-                paint = new Paint();
-                paint.setColor(Color.BLUE);
-                paint.setStrokeWidth(5);
-                matrix = new Matrix();
-                canvas.drawBitmap(bmp, matrix, paint);
-
-                choosenImage.setImageBitmap(alteredBitmap);
-                choosenImage.setOnTouchListener(this);
-                choosenImage.setOnClickListener(this);
-            }
-            catch (Exception e){
-                Log.v("Error", e.toString());
             }
         }
     }
