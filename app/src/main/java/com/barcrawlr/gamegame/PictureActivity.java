@@ -1,34 +1,24 @@
 package com.barcrawlr.gamegame;
 
-import android.graphics.Picture;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import org.w3c.dom.Text;
-import io.realm.Realm;
-import io.realm.RealmObject;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.util.Random;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class PictureActivity extends AppCompatActivity {
 
@@ -146,7 +136,6 @@ public class PictureActivity extends AppCompatActivity {
                         else{
                             newGameId.setId(gameIdGenerator);
                         }
-                        int testcommit = 0;
                         picture.setPicId();
 
                         realm.copyToRealm(newGameId);
