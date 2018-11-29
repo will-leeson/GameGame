@@ -88,15 +88,12 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
 
     public boolean onTouch(View v, MotionEvent event) {
         int action = event.getAction();
-        Log.v("test", "hereweare");
         switch(action){
             case MotionEvent.ACTION_DOWN:
-                Log.v("test", "down");
                 downx = event.getX();
                 downy = event.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                Log.v("test", "move");
                 upx = event.getX();
                 upy = event.getY();
                 canvas.drawLine(downx, downy, upx, upy, paint);
@@ -105,17 +102,14 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
                 downy = upy;
                 break;
             case MotionEvent.ACTION_UP:
-                Log.v("test", "up");
                 upx = event.getX();
                 upy = event.getY();
                 canvas.drawLine(downx, downy, upx, upy, paint);
                 choosenImage.invalidate();
                 break;
             case MotionEvent.ACTION_CANCEL:
-                Log.v("test", "cancel");
                 break;
             default:
-                Log.v("test", "default");
                 break;
         }
         return true;
