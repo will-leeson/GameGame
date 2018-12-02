@@ -82,6 +82,8 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
                 } catch (Exception e) {
                     Log.v("Exception", e.getMessage());
                 }
+                Intent intent =  new Intent(v.getContext(), MainActivity.class);
+                startActivity(intent);
             }
         }
     }

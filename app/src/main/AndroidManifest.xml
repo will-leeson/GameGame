@@ -10,15 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FirstRoundActivity" />
+        <activity android:name=".LoginServerActivity" />
         <activity android:name=".PictureActivity" />
         <activity android:name=".PlayActivity" />
         <activity android:name=".ChooseWinnerActivity" />
         <activity android:name=".LeaderboardActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".DrawRoundActivity" />
         <activity android:name=".GuessRoundActivity" />
-        <activity android:name=".LoginServerActivity">
+        <activity android:name=".FirstRoundActivity" />
+        <activity android:name=".DrawRoundActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
