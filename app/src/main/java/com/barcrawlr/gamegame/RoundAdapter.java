@@ -16,9 +16,6 @@ import io.realm.Realm;
 import io.realm.RealmRecyclerViewAdapter;
 import io.realm.RealmResults;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RoundAdapter extends RealmRecyclerViewAdapter<Picture,RoundAdapter.ViewHolder> {
 
     private Context context;
