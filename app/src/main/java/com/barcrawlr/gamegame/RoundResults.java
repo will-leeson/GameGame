@@ -16,7 +16,7 @@ public class RoundResults extends AppCompatActivity {
 
     private RecyclerView RoundRecycler;
     private RecyclerView.Adapter RoundAdapter;
-    private ArrayList<Picture> Dataset;
+    //private ArrayList<Picture> Dataset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
