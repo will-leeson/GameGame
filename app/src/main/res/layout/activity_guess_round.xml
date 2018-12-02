@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GuessRoundActivity">
+    tools:context=".GuessRoundActivity"
+    android:background="@drawable/yellow_backdrop">
 
     <EditText
         android:id="@+id/guess"
@@ -15,7 +16,7 @@
         android:layout_marginTop="52dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Guess"
+        android:hint="Guess"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"

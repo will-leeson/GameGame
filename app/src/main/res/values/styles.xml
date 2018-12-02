@@ -6,6 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/ArvoTextViewStyle</item>
+        <item name="android:buttonStyle">@style/ArvoButtonStyle</item>
+    </style>
+
+    <style name="ArvoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/arvo_regular</item>
+    </style>
+
+    <style name="ArvoButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">@font/arvo_regular</item>
     </style>
 
 </resources>
