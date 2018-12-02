@@ -1,31 +1,23 @@
 package com.barcrawlr.gamegame;
 
-import android.graphics.Picture;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import org.w3c.dom.Text;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.util.Random;
+
 import io.realm.Realm;
-import io.realm.RealmObject;
 import io.realm.RealmResults;
 
 public class PictureActivity extends AppCompatActivity {
@@ -35,7 +27,8 @@ public class PictureActivity extends AppCompatActivity {
     TextView textTargetUri;
     private Button buttonLoadImage;
     private Bitmap bitmap;
-
+    private Random rand = new Random();
+    private int gameIdGenerator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +37,7 @@ public class PictureActivity extends AppCompatActivity {
         imageButton = findViewById(R.id.imageButton);
         buttonLoadImage = findViewById(R.id.loadimage);
         textTargetUri = (TextView) findViewById(R.id.targeturi);
+        final Random rand = new Random();
 
         buttonLoadImage.setOnClickListener(new Button.OnClickListener() {
 
@@ -71,11 +65,12 @@ public class PictureActivity extends AppCompatActivity {
         PictureActivity.super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 || requestCode == 0 && resultCode == RESULT_OK) {
 
+            gameIdGenerator = rand.nextInt(99999) + 1;
             if (requestCode == 1) {
                 Bundle extras = data.getExtras();
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
 
-               imageButton.setImageBitmap(imageBitmap);
+                imageButton.setImageBitmap(imageBitmap);
             } else if (requestCode == 0) {
                 final Uri targetUri = data.getData();
                 textTargetUri.setText(targetUri.toString());
@@ -89,15 +84,36 @@ public class PictureActivity extends AppCompatActivity {
                 @Override
                 public void execute(Realm realm) {
                     com.barcrawlr.gamegame.Picture picture = new com.barcrawlr.gamegame.Picture();
-                    User user = new User();
+                    final RealmResults<User> users = realm.where(User.class).findAll();
+                    final RealmResults<Game> newGame = realm.where(Game.class).findAll();
+
+
+                    Game newGameId = new Game();
                     if (requestCode == 1) {
-                       BitmapDrawable image = (BitmapDrawable) imageButton.getDrawable();
+                        BitmapDrawable image = (BitmapDrawable) imageButton.getDrawable();
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         image.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] imageInByte = baos.toByteArray();
                         picture.setImage(imageInByte);
-                        user.setId(242341);
-                        realm.copyFromRealm(user);
+                        Game game1 = realm.where(Game.class).equalTo("id", gameIdGenerator).findFirst();
+                        //  newGame.contains(newGame.sort("id").where().equalTo("id", gameIdGenerator).);
+                        if(game1!=null) {
+                            while (game1!=null) {
+                                gameIdGenerator = rand.nextInt(99999) + 1;
+                                if (game1==null) {
+                                    newGameId.setId(gameIdGenerator);
+                                    break;
+                                }
+                            }
+                        }
+                        else{
+                            newGameId.setId(gameIdGenerator);
+                        }
+
+                        //user.setId(242341);
+                        //  realm.copyFromRealm(user);
+                        picture.setPicId();
+                        realm.copyToRealm(newGameId);
                         realm.copyToRealm(picture);
                         finish();
                     } else if (requestCode == 0) {
@@ -106,24 +122,32 @@ public class PictureActivity extends AppCompatActivity {
                         byte[] byteArray = stream.toByteArray();
                         //bitmap.recycle();
                         picture.setImage(byteArray);
-                        user.setId(24231);
-
+                        Game game1 = realm.where(Game.class).equalTo("id", gameIdGenerator).findFirst();
+                      //  newGame.contains(newGame.sort("id").where().equalTo("id", gameIdGenerator).);
+                        if(game1!=null) {
+                            while (game1!=null) {
+                                gameIdGenerator = rand.nextInt(99999) + 1;
+                                if (game1==null) {
+                                    newGameId.setId(gameIdGenerator);
+                                    break;
+                                }
+                            }
+                        }
+                        else{
+                            newGameId.setId(gameIdGenerator);
+                        }
                         picture.setPicId();
 
-                        realm.copyToRealm(user);
+                        realm.copyToRealm(newGameId);
                         realm.copyToRealm(picture);
                         finish();
-                       /** Intent intent = new Intent(getBaseContext(), TestRetriv.class);
-                        intent.putExtra("Pic", picture.getImage());
-                        startActivity(intent);
-                        **/
+                        /** Intent intent = new Intent(getBaseContext(), TestRetriv.class);
+                         intent.putExtra("Pic", picture.getImage());
+                         startActivity(intent);
+                         **/
                     }
                 }
             });
         }
     }
 }
-
-
-
-
