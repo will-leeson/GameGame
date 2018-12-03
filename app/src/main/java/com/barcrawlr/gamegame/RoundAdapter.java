@@ -19,6 +19,7 @@ import io.realm.RealmResults;
 public class RoundAdapter extends RealmRecyclerViewAdapter<Picture,RoundAdapter.ViewHolder> {
 
     private Context context;
+    RealmResults<Picture> results;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageView DrawImage;
@@ -32,8 +33,8 @@ public class RoundAdapter extends RealmRecyclerViewAdapter<Picture,RoundAdapter.
 
     }
 
-    public RoundAdapter(RealmResults<Picture> data, Activity context) {
-        super(data,true);
+    public RoundAdapter(RealmResults<Picture> results, Activity context) {
+        super(results,true);
         this.context = context;
         Realm realm = Realm.getDefaultInstance();
     }
@@ -45,10 +46,10 @@ public class RoundAdapter extends RealmRecyclerViewAdapter<Picture,RoundAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Picture pos = getItem(position);
-        Bitmap btmp = BitmapFactory.decodeByteArray(pos.getImage(),0,pos.getImage().length);
+        final Picture pic = results.get(position);
+        Bitmap btmp = BitmapFactory.decodeByteArray(pic.getImage(),0,pic.getImage().length);
         holder.DrawImage.setImageBitmap(btmp);
-        holder.DrawGuess.setText(pos.getWord());
+        holder.DrawGuess.setText(pic.getWord());
     }
 
 }
