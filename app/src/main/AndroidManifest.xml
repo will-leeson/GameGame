@@ -15,10 +15,10 @@
         <activity android:name=".PlayActivity" />
         <activity android:name=".ChooseWinnerActivity" />
         <activity android:name=".LeaderboardActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".GuessRoundActivity" />
+        <activity android:name=".DrawRoundActivity" />
         <activity android:name=".FirstRoundActivity" />
-        <activity android:name=".DrawRoundActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
