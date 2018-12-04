@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -23,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 import io.realm.Realm;
@@ -37,8 +39,10 @@ public class PictureActivity extends AppCompatActivity {
     private Bitmap bitmap;
     private Random rand = new Random();
     private String mCurrentPhotoPath;
+    private String imageFilePath;
     static final int REQUEST_TAKE_PHOTO = 1;
     private int gameIdGenerator;
+    private File photoFile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +70,7 @@ public class PictureActivity extends AppCompatActivity {
                 // Ensure that there's a camera activity to handle the intent
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                     // Create the File where the photo should go
-                    File photoFile = null;
+                    photoFile = null;
                     try {
                         photoFile = createImageFile();
                     } catch (IOException ex) {
@@ -75,9 +79,16 @@ public class PictureActivity extends AppCompatActivity {
                     }
                     // Continue only if the File was successfully created
                     if (photoFile != null) {
-                        Uri photoURI = FileProvider.getUriForFile(getBaseContext(),
-                                "com.example.android.fileprovider",
-                                photoFile);
+                        Log.v("hereweare", photoFile.toString());
+//                        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+
+//                        File file = new File(storageDir.getAbsolutePath() + "/" + "test");
+
+//                        Uri uri = FileProvider.getUriForFile(file);
+//                        Uri photoURI = FileProvider.getUriForFile(view.getContext(),"com.barcrawlr.gamegame.provider", file);
+
+
+                        Uri photoURI = FileProvider.getUriForFile(view.getContext(),"com.barcrawlr.gamegame.provider", photoFile);
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                         startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
                     }
@@ -85,24 +96,20 @@ public class PictureActivity extends AppCompatActivity {
             }
         });
     }
-    protected File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = null;
-        try {
-            image = File.createTempFile(
-                    imageFileName,  /* prefix */
-                    ".jpg",         /* suffix */
-                    storageDir      /* directory */
-            );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private File createImageFile() throws IOException {
+        String timeStamp =
+                new SimpleDateFormat("yyyyMMdd_HHmmss",
+                        Locale.getDefault()).format(new Date());
+        String imageFileName = "IMG_" + timeStamp + "_";
+        File storageDir =
+                getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
 
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
+        imageFilePath = image.getAbsolutePath();
         return image;
     }
 
