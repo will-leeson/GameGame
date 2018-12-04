@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import io.realm.Realm;
 import io.realm.RealmRecyclerViewAdapter;
 import io.realm.RealmResults;
@@ -19,6 +18,7 @@ import io.realm.RealmResults;
 public class RoundAdapter extends RealmRecyclerViewAdapter<Picture,RoundAdapter.ViewHolder> {
 
     private Context context;
+    RealmResults<Picture> results;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageView DrawImage;
@@ -32,10 +32,10 @@ public class RoundAdapter extends RealmRecyclerViewAdapter<Picture,RoundAdapter.
 
     }
 
-    public RoundAdapter(RealmResults<Picture> data, Activity context) {
-        super(data,true);
+    public RoundAdapter(RealmResults<Picture> results, Context context) {
+        super( results,true);
         this.context = context;
-        Realm realm = Realm.getDefaultInstance();
+        //Realm realm = Realm.getDefaultInstance();
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
@@ -45,10 +45,9 @@ public class RoundAdapter extends RealmRecyclerViewAdapter<Picture,RoundAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Picture pos = getItem(position);
-        Bitmap btmp = BitmapFactory.decodeByteArray(pos.getImage(),0,pos.getImage().length);
-        holder.DrawImage.setImageBitmap(btmp);
-        holder.DrawGuess.setText(pos.getWord());
+        final Picture pic = results.get(position);
+        commonFunctions.printImage(pic.getImage(),holder.DrawImage);
+        holder.DrawGuess.setText(pic.getWord());
     }
 
 }
