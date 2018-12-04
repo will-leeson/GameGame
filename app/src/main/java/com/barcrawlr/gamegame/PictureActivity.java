@@ -178,7 +178,6 @@ public class PictureActivity extends AppCompatActivity {
                         Intent intent = new Intent(getBaseContext(), FirstRoundActivity.class);
                         intent.putExtra("Pic", picture.getImage());
                         startActivity(intent);
-
                     }
                 }
             });
