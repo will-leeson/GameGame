@@ -7,7 +7,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LoginServerActivity" />
@@ -15,10 +15,10 @@
         <activity android:name=".PlayActivity" />
         <activity android:name=".ChooseWinnerActivity" />
         <activity android:name=".LeaderboardActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".GuessRoundActivity" />
         <activity android:name=".FirstRoundActivity" />
-        <activity android:name=".DrawRoundActivity">
+        <activity android:name=".GuessRoundActivity" />
+        <activity android:name=".DrawRoundActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
