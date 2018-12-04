@@ -8,13 +8,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -49,6 +46,7 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
         answer = (EditText) findViewById(R.id.answerText);
         choosenImage = (ImageView) findViewById(R.id.choosenImage);
         saveImage = (Button) findViewById(R.id.saveImage1);
+        final byte[] picture = getIntent().getExtras().getByteArray("Pic");
 
         saveImage.setOnClickListener(this);
         choosenImage.setOnClickListener(this);
@@ -57,8 +55,8 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
         BitmapFactory.Options opt = new BitmapFactory.Options();
         opt.inScaled = true;
         opt.inMutable = true;
-        bmp = BitmapFactory.decodeResource(this.getResources(),
-                R.drawable.bg, opt);
+        Bitmap bmp = BitmapFactory.decodeByteArray(picture, 0, picture.length);
+
         choosenImage.setImageBitmap(bmp);
         canvas = new Canvas(bmp);
         paint = new Paint();

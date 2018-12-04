@@ -1,10 +1,9 @@
 package com.barcrawlr.gamegame;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import io.realm.ObjectServerError;
 import io.realm.Realm;
@@ -46,7 +45,7 @@ public class LoginServerActivity extends AppCompatActivity {
                     public void onSuccess(Realm realm) {
 
                         Log.v("success", "success");
-                        Intent intent = new Intent(getBaseContext(), FirstRoundActivity.class);
+                        Intent intent = new Intent(getBaseContext(), PictureActivity.class);
                         startActivity(intent);
                     }
 
