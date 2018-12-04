@@ -55,7 +55,7 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
         BitmapFactory.Options opt = new BitmapFactory.Options();
         opt.inScaled = true;
         opt.inMutable = true;
-        Bitmap bmp = BitmapFactory.decodeByteArray(picture, 0, picture.length);
+        Bitmap bmp = BitmapFactory.decodeByteArray(picture, 0, picture.length, opt);
 
         choosenImage.setImageBitmap(bmp);
         canvas = new Canvas(bmp);

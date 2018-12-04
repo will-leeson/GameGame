@@ -3,7 +3,6 @@ package com.barcrawlr.gamegame;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,8 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -43,6 +40,8 @@ public class PictureActivity extends AppCompatActivity {
     static final int REQUEST_TAKE_PHOTO = 1;
     private int gameIdGenerator;
     private File photoFile;
+    private Uri photoURI;
+    //private Uri targetUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,9 +87,9 @@ public class PictureActivity extends AppCompatActivity {
 //                        Uri photoURI = FileProvider.getUriForFile(view.getContext(),"com.barcrawlr.gamegame.provider", file);
 
 
-                        Uri photoURI = FileProvider.getUriForFile(view.getContext(),"com.barcrawlr.gamegame.provider", photoFile);
+                        photoURI = FileProvider.getUriForFile(view.getContext(),"com.barcrawlr.gamegame.provider", photoFile);
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                        startActivityForResult(takePictureIntent, 1);
                     }
                 }
             }
@@ -118,22 +117,24 @@ public class PictureActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(final int requestCode, int resultCode, Intent data) {
         PictureActivity.super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_TAKE_PHOTO || requestCode == 0 && resultCode == RESULT_OK) {
+        if (requestCode == 1 || requestCode == 0 && resultCode == RESULT_OK) {
 
             gameIdGenerator = rand.nextInt(99999) + 1;
             if (requestCode == 1) {
 
-                //Bundle extras = data.getExtras();
-                //Bitmap imageBitmap = (Bitmap) extras.get("data");
-
-                // imageButton.setImageBitmap(imageBitmap);
-                Glide.with(this).load(mCurrentPhotoPath).into(imageButton);
+                Uri targetUri = photoURI;
+                try {
+                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
 
 
             } else if (requestCode == 0) {
                 final Uri targetUri = data.getData();
                 textTargetUri.setText(targetUri.toString());
                 try {
+                    //Bitmap bitmap1;
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
 
                 } catch (FileNotFoundException e) { }
@@ -149,9 +150,9 @@ public class PictureActivity extends AppCompatActivity {
 
                     Game newGameId = new Game();
                     if (requestCode == 1) {
-                        BitmapDrawable image = (BitmapDrawable) imageButton.getDrawable();
+                        //  BitmapDrawable image = (BitmapDrawable) imageButton.getDrawable();
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        image.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] imageInByte = baos.toByteArray();
                         picture.setImage(imageInByte);
                         Game game1 = realm.where(Game.class).equalTo("id", gameIdGenerator).findFirst();
