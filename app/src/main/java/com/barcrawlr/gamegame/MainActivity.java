@@ -1,16 +1,12 @@
 package com.barcrawlr.gamegame;
 
-import android.content.Context;
 import android.content.Intent;
-import android.se.omapi.Session;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmObject;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,12 +39,12 @@ public class MainActivity extends AppCompatActivity {
                 final RealmResults<User> users = realm.where(User.class).findAll();
                 realm.beginTransaction();
 
-                Intent intent = new Intent(v.getContext(), PlayActivity.class);
-                intent.putExtra("Pic", pictures.get(Picture.getPicId()).getImage());
-                intent.putExtra("Pic#", Picture.getPicId());
-                realm.commitTransaction();
-                realm.close();
-                startActivity(intent);
+         //       Intent intent = new Intent(v.getContext(), PlayActivity.class);
+          //      intent.putExtra("Pic", pictures.get(Picture.getPicId()).getImage());
+            //    intent.putExtra("Pic#", Picture.getPicId());
+              //  realm.commitTransaction();
+               // realm.close();
+                //startActivity(intent);
             }
         });
     }
