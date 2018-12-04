@@ -28,7 +28,6 @@
         </provider>
         <activity android:name=".LoginServerActivity" />
         <activity android:name=".GuessRoundActivity" />
-        <activity android:name=".LeaderboardActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".DrawRoundActivity" />
         <activity android:name=".FirstRoundActivity" />
