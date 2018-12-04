@@ -11,7 +11,6 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
@@ -27,7 +26,7 @@ import io.realm.Realm;
 
 public class PictureActivity extends AppCompatActivity {
 
-    private ImageButton imageButton;
+    private Button imageButton;
     private Realm realm;
     TextView textTargetUri;
     private Button buttonLoadImage;
@@ -45,11 +44,10 @@ public class PictureActivity extends AppCompatActivity {
         realm = Realm.getDefaultInstance();
         imageButton = findViewById(R.id.imageButton);
         buttonLoadImage = findViewById(R.id.loadimage);
-        textTargetUri = (TextView) findViewById(R.id.targeturi);
+
         final Random rand = new Random();
 
         buttonLoadImage.setOnClickListener(new Button.OnClickListener() {
-
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(Intent.ACTION_PICK,
@@ -111,8 +109,8 @@ public class PictureActivity extends AppCompatActivity {
 
 
             } else if (requestCode == 0) {
+                
                 final Uri targetUri = data.getData();
-                textTargetUri.setText(targetUri.toString());
                 try {
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
 
@@ -124,64 +122,38 @@ public class PictureActivity extends AppCompatActivity {
                 public void execute(Realm realm) {
                     com.barcrawlr.gamegame.Picture picture = new com.barcrawlr.gamegame.Picture();
                     Game newGameId = new Game();
-                    if (requestCode == 1) {
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                        byte[] imageInByte = baos.toByteArray();
-                        picture.setImage(imageInByte);
-                        Game game1 = realm.where(Game.class).equalTo("id", gameIdGenerator).findFirst();
-                        if(game1!=null) {
-                            while (game1!=null) {
-                                gameIdGenerator = rand.nextInt(99999) + 1;
-                                if (game1==null) {
-                                    newGameId.setId(gameIdGenerator);
-                                    break;
-                                }
+
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    byte[] byteArray = stream.toByteArray();
+                    picture.setImage(byteArray);
+
+                    Game gameIDCheck = realm.where(Game.class).equalTo("id", gameIdGenerator).findFirst();
+                    if(gameIDCheck!=null) {
+                        while (gameIDCheck!=null) {
+                            gameIdGenerator = rand.nextInt(99999) + 1;
+                            if (gameIDCheck==null) {
+                                newGameId.setId(gameIdGenerator);
+                                break;
                             }
                         }
-                        else{
-                            newGameId.setId(gameIdGenerator);
-                        }
-
-                        picture.setPicId();
-                        realm.copyToRealm(newGameId);
-                        realm.copyToRealm(picture);
-                        finish();
-                        Intent intent = new Intent(getBaseContext(), FirstRoundActivity.class);
-                        intent.putExtra("Pic", picture.getImage());
-                        startActivity(intent);
-
-                    } else if (requestCode == 0) {
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                        byte[] byteArray = stream.toByteArray();
-                        picture.setImage(byteArray);
-                        Game game1 = realm.where(Game.class).equalTo("id", gameIdGenerator).findFirst();
-
-                        if(game1!=null) {
-                            while (game1!=null) {
-                                gameIdGenerator = rand.nextInt(99999) + 1;
-                                if (game1==null) {
-                                    newGameId.setId(gameIdGenerator);
-                                    break;
-                                }
-                            }
-                        }
-                        else{
-                            newGameId.setId(gameIdGenerator);
-                        }
-                        picture.setPicId();
-
-                        realm.copyToRealm(newGameId);
-                        realm.copyToRealm(picture);
-                        finish();
-                        Intent intent = new Intent(getBaseContext(), FirstRoundActivity.class);
-                        intent.putExtra("Pic", picture.getImage());
-                        startActivity(intent);
                     }
+                    else{
+                        newGameId.setId(gameIdGenerator);
+                    }
+
+                    picture.setPicId();
+                    realm.copyToRealm(newGameId);
+                    realm.copyToRealm(picture);
+                    finish();
+
+                    Intent intent = new Intent(getBaseContext(), FirstRoundActivity.class);
+                    intent.putExtra("Pic", picture.getImage());
+                    startActivity(intent);
                 }
             });
         }
     }
 }
+
 

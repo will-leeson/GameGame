@@ -7,39 +7,25 @@
     tools:context=".SendActivity"
     android:background="@drawable/yellow_backdrop">
 
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/imageButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Test" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Take A Photo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loadimage"
+        app:layout_constraintVertical_bias="0.069"
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/loadimage"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="212dp"
+        android:layout_marginTop="224dp"
         android:text="Use Your Own Photo"
-        app:layout_constraintTop_toBottomOf="@+id/targeturi"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
-    <TextView
-        android:id="@+id/targeturi"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="296dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loadimage"
-        app:layout_constraintVertical_bias="0.192"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
 
 </android.support.constraint.ConstraintLayout>
