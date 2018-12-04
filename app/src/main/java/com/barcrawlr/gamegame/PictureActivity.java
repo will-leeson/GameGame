@@ -9,7 +9,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -25,7 +24,6 @@ import java.util.Locale;
 import java.util.Random;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class PictureActivity extends AppCompatActivity {
 
@@ -35,13 +33,11 @@ public class PictureActivity extends AppCompatActivity {
     private Button buttonLoadImage;
     private Bitmap bitmap;
     private Random rand = new Random();
-    private String mCurrentPhotoPath;
     private String imageFilePath;
-    static final int REQUEST_TAKE_PHOTO = 1;
     private int gameIdGenerator;
     private File photoFile;
     private Uri photoURI;
-    //private Uri targetUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,27 +62,13 @@ public class PictureActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                // Ensure that there's a camera activity to handle the intent
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    // Create the File where the photo should go
                     photoFile = null;
                     try {
                         photoFile = createImageFile();
-                    } catch (IOException ex) {
-                        // Error occurred while creating the File
+                    } catch (IOException ex) { }
 
-                    }
-                    // Continue only if the File was successfully created
                     if (photoFile != null) {
-                        Log.v("hereweare", photoFile.toString());
-//                        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-
-//                        File file = new File(storageDir.getAbsolutePath() + "/" + "test");
-
-//                        Uri uri = FileProvider.getUriForFile(file);
-//                        Uri photoURI = FileProvider.getUriForFile(view.getContext(),"com.barcrawlr.gamegame.provider", file);
-
-
                         photoURI = FileProvider.getUriForFile(view.getContext(),"com.barcrawlr.gamegame.provider", photoFile);
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                         startActivityForResult(takePictureIntent, 1);
@@ -112,8 +94,6 @@ public class PictureActivity extends AppCompatActivity {
         return image;
     }
 
-
-
     @Override
     protected void onActivityResult(final int requestCode, int resultCode, Intent data) {
         PictureActivity.super.onActivityResult(requestCode, resultCode, data);
@@ -134,7 +114,6 @@ public class PictureActivity extends AppCompatActivity {
                 final Uri targetUri = data.getData();
                 textTargetUri.setText(targetUri.toString());
                 try {
-                    //Bitmap bitmap1;
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
 
                 } catch (FileNotFoundException e) { }
@@ -144,19 +123,13 @@ public class PictureActivity extends AppCompatActivity {
                 @Override
                 public void execute(Realm realm) {
                     com.barcrawlr.gamegame.Picture picture = new com.barcrawlr.gamegame.Picture();
-                    final RealmResults<User> users = realm.where(User.class).findAll();
-                    final RealmResults<Game> newGame = realm.where(Game.class).findAll();
-
-
                     Game newGameId = new Game();
                     if (requestCode == 1) {
-                        //  BitmapDrawable image = (BitmapDrawable) imageButton.getDrawable();
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] imageInByte = baos.toByteArray();
                         picture.setImage(imageInByte);
                         Game game1 = realm.where(Game.class).equalTo("id", gameIdGenerator).findFirst();
-                        //  newGame.contains(newGame.sort("id").where().equalTo("id", gameIdGenerator).);
                         if(game1!=null) {
                             while (game1!=null) {
                                 gameIdGenerator = rand.nextInt(99999) + 1;
@@ -170,8 +143,6 @@ public class PictureActivity extends AppCompatActivity {
                             newGameId.setId(gameIdGenerator);
                         }
 
-                        //user.setId(242341);
-                        //  realm.copyFromRealm(user);
                         picture.setPicId();
                         realm.copyToRealm(newGameId);
                         realm.copyToRealm(picture);
@@ -184,10 +155,9 @@ public class PictureActivity extends AppCompatActivity {
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                         byte[] byteArray = stream.toByteArray();
-                        //bitmap.recycle();
                         picture.setImage(byteArray);
                         Game game1 = realm.where(Game.class).equalTo("id", gameIdGenerator).findFirst();
-                        //  newGame.contains(newGame.sort("id").where().equalTo("id", gameIdGenerator).);
+
                         if(game1!=null) {
                             while (game1!=null) {
                                 gameIdGenerator = rand.nextInt(99999) + 1;
