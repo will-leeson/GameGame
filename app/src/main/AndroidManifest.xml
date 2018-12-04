@@ -18,6 +18,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".DrawRoundActivity" />
         <activity android:name=".FirstRoundActivity" />
+        <activity android:name=".RoundResults" />
         <activity android:name=".GuessRoundActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

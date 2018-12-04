@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
+//rename this, classes should be capitalized
 public class commonFunctions {
 
     public static void printImage(byte[] picture, ImageView imageView){
