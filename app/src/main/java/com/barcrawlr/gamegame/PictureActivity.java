@@ -205,6 +205,9 @@ public class PictureActivity extends AppCompatActivity {
                         realm.copyToRealm(newGameId);
                         realm.copyToRealm(picture);
                         finish();
+                        Intent intent = new Intent(getBaseContext(), FirstRoundActivity.class);
+                        intent.putExtra("Pic", picture.getImage());
+                        startActivity(intent);
 
                     }
                 }
