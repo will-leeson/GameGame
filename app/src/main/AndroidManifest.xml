@@ -32,6 +32,7 @@
         <activity android:name=".RoundResults" />
         <activity android:name=".DrawRoundActivity" />
         <activity android:name=".FirstRoundActivity" />
+        <activity android:name=".LeaderboardActivity" />
         <activity android:name=".PictureActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

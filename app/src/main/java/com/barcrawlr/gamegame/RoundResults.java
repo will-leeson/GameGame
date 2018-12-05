@@ -31,7 +31,9 @@ public class RoundResults extends AppCompatActivity {
 
         Realm realm = Realm.getDefaultInstance();
 
+
         RealmResults<Picture> results = realm.where(Picture.class).findAll();
+//        RealmResults<Picture> results = realm.where(Picture.class).equalTo("id", );
                 /*.findAllSorted("image",Sort.DESCENDING,"word",Sort.DESCENDING);*/
 
 
