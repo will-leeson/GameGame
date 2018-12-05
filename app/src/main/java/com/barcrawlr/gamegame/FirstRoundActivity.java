@@ -52,7 +52,11 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
         choosenImage = (ImageView) findViewById(R.id.choosenImage);
         saveImage = (Button) findViewById(R.id.saveImage1);
 
-        pic = (Picture) getIntent().getSerializableExtra("Pic");
+        Realm realm = Realm.getDefaultInstance();
+
+        String id = (String) getIntent().getStringExtra("Pic");
+        Log.v("Picture here", id);
+        pic = realm.where(Picture.class).equalTo("id", id).findFirst();
 
         final byte[] picture = pic.getImage();
 

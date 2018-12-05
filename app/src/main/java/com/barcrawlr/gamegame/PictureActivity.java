@@ -132,8 +132,8 @@ public class PictureActivity extends AppCompatActivity {
 //                    Game gameIDCheck = realm.where(Game.class).equalTo("id", gameIdGenerator).findFirst();
                     newGameId.setId();
 
-                    picture.setPicId();
-//                    picture.setId();
+//                    picture.setPicId();
+                    picture.setId();
 
 //                    realm.copyToRealm(newGameId);
 
@@ -143,7 +143,7 @@ public class PictureActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(getBaseContext(), FirstRoundActivity.class);
 //                    intent.putExtra("Pic", picture.);
-                    intent.putExtra("Pic", (Serializable) picture);
+                    intent.putExtra("Pic", picture.getId());
                     startActivity(intent);
                 }
             });
