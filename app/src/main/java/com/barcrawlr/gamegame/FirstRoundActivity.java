@@ -67,7 +67,7 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
 
     public void onClick(View v){
         if(v == saveImage){
-            Intent intent =  new Intent(v.getContext(), MainActivity.class);
+            Intent intent =  new Intent(v.getContext(), RoundResults.class);
             startActivity(intent);
         }
     }

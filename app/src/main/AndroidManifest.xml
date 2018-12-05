@@ -29,9 +29,10 @@
         <activity android:name=".LoginServerActivity" />
         <activity android:name=".GuessRoundActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".PictureActivity" />
         <activity android:name=".DrawRoundActivity" />
         <activity android:name=".FirstRoundActivity" />
-        <activity android:name=".PictureActivity">
+        <activity android:name=".RoundResults">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

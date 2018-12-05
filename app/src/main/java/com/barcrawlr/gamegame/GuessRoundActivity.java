@@ -33,7 +33,6 @@ public class GuessRoundActivity extends AppCompatActivity {
         guessPic.setImageBitmap(bmp);
 
         Realm realm = Realm.getDefaultInstance();
-        //realm.insertOrUpdate(Picture.getId().g);
 
         guessButton.setOnClickListener(new View.OnClickListener() {
             @Override

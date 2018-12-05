@@ -35,7 +35,7 @@ public class RoundAdapter extends RealmRecyclerViewAdapter<Picture,RoundAdapter.
     public RoundAdapter(RealmResults<Picture> results, Context context) {
         super( results,true);
         this.context = context;
-        //Realm realm = Realm.getDefaultInstance();
+        Realm realm = Realm.getDefaultInstance();
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
@@ -45,7 +45,7 @@ public class RoundAdapter extends RealmRecyclerViewAdapter<Picture,RoundAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Picture pic = results.get(position);
+        Picture pic = results.get(position);
         commonFunctions.printImage(pic.getImage(),holder.DrawImage);
         holder.DrawGuess.setText(pic.getWord());
     }
