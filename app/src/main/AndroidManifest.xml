@@ -29,6 +29,7 @@
         <activity android:name=".LoginServerActivity" />
         <activity android:name=".GuessRoundActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".RoundResults" />
         <activity android:name=".DrawRoundActivity" />
         <activity android:name=".FirstRoundActivity" />
         <activity android:name=".PictureActivity">
