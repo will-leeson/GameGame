@@ -67,22 +67,8 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
 
     public void onClick(View v){
         if(v == saveImage){
-            if(alteredBitmap!= null) {
-                ContentValues contentValues = new ContentValues(3);
-                contentValues.put(MediaStore.Audio.Media.DISPLAY_NAME, "Draw on me");
-
-                Uri imageFileUri = getContentResolver().insert(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, contentValues);
-                try {
-                    OutputStream imageFileOS = getContentResolver().openOutputStream(imageFileUri);
-                    alteredBitmap.compress(Bitmap.CompressFormat.JPEG, 90, imageFileOS);
-                    Toast t = Toast.makeText(this, "Saved", Toast.LENGTH_LONG);
-                    t.show();
-                } catch (Exception e) {
-                    Log.v("Exception", e.getMessage());
-                }
-                Intent intent =  new Intent(v.getContext(), MainActivity.class);
-                startActivity(intent);
-            }
+            Intent intent =  new Intent(v.getContext(), MainActivity.class);
+            startActivity(intent);
         }
     }
 
