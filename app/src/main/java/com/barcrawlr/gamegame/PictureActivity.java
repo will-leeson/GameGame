@@ -109,7 +109,7 @@ public class PictureActivity extends AppCompatActivity {
 
 
             } else if (requestCode == 0) {
-                
+
                 final Uri targetUri = data.getData();
                 try {
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
