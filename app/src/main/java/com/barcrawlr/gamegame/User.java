@@ -1,25 +1,29 @@
 package com.barcrawlr.gamegame;
 
+import java.util.UUID;
+
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class User extends RealmObject {
 
-    private static int id;
+    @PrimaryKey
+    private static String id;
     private int newId;
 
-    public static int getNewId() {
+    public static String getNewId() {
         return getId();
     }
 
-    public void setNewId(int newId) {
+    public void setNewId() {
         this.newId = newId;
     }
 
-    public static int getId() {
+    public static String getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId() {
+        this.id = UUID.randomUUID().toString();
     }
 }

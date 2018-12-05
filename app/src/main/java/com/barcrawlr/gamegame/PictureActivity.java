@@ -17,6 +17,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -128,27 +129,21 @@ public class PictureActivity extends AppCompatActivity {
                     byte[] byteArray = stream.toByteArray();
                     picture.setImage(byteArray);
 
-                    Game gameIDCheck = realm.where(Game.class).equalTo("id", gameIdGenerator).findFirst();
-                    if(gameIDCheck!=null) {
-                        while (gameIDCheck!=null) {
-                            gameIdGenerator = rand.nextInt(99999) + 1;
-                            if (gameIDCheck==null) {
-                                newGameId.setId(gameIdGenerator);
-                                break;
-                            }
-                        }
-                    }
-                    else{
-                        newGameId.setId(gameIdGenerator);
-                    }
+//                    Game gameIDCheck = realm.where(Game.class).equalTo("id", gameIdGenerator).findFirst();
+                    newGameId.setId();
 
                     picture.setPicId();
-                    realm.copyToRealm(newGameId);
+//                    picture.setId();
+
+//                    realm.copyToRealm(newGameId);
+
+                    picture.setGame(newGameId);
                     realm.copyToRealm(picture);
                     finish();
 
                     Intent intent = new Intent(getBaseContext(), FirstRoundActivity.class);
-                    intent.putExtra("Pic", picture.getImage());
+//                    intent.putExtra("Pic", picture.);
+                    intent.putExtra("Pic", (Serializable) picture);
                     startActivity(intent);
                 }
             });

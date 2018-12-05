@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,13 +21,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
+
+import io.realm.Realm;
 
 public class FirstRoundActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener{
 
     EditText answer;
     ImageView choosenImage;
     Button saveImage;
+    Picture pic;
 
     Bitmap bmp;
     Bitmap alteredBitmap;
@@ -46,7 +51,10 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
         answer = (EditText) findViewById(R.id.answerText);
         choosenImage = (ImageView) findViewById(R.id.choosenImage);
         saveImage = (Button) findViewById(R.id.saveImage1);
-        final byte[] picture = getIntent().getExtras().getByteArray("Pic");
+
+        pic = (Picture) getIntent().getSerializableExtra("Pic");
+
+        final byte[] picture = pic.getImage();
 
         saveImage.setOnClickListener(this);
         choosenImage.setOnClickListener(this);
@@ -67,7 +75,26 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
 
     public void onClick(View v){
         if(v == saveImage){
+
+            Realm realm = Realm.getDefaultInstance();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+
+
+//                    Picture pic2 = new Picture();
+                    BitmapDrawable image = (BitmapDrawable) choosenImage.getDrawable();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    image.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    pic.setImage(baos.toByteArray());
+                    pic.setWord(answer.getText().toString());
+
+                    realm.copyToRealmOrUpdate(pic);
+                }
+            });
+
             Intent intent =  new Intent(v.getContext(), RoundResults.class);
+
             startActivity(intent);
         }
     }

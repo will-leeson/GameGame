@@ -1,17 +1,30 @@
 package com.barcrawlr.gamegame;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Picture extends RealmObject {
+public class Picture extends RealmObject implements Serializable {
 
 
-    //@PrimaryKey
-    private static int picId =-1;
-    private static int id;
+    @PrimaryKey
+    private static String id;
+    private static  int picId;
     private byte[] image;
     private String word;
     private int score;
+
+    private Game game;
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Game getGame() {
+        return this.game;
+    }
 
     public static int getPicId() {
         return picId;
@@ -22,13 +35,14 @@ public class Picture extends RealmObject {
         return picId;
     }
 
-    public static int getId() {
+    public static String getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId() {
+        this.id = UUID.randomUUID().toString();
     }
+
     public int getScore() {
         return score;
     }
