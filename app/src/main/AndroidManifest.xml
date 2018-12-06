@@ -9,7 +9,6 @@
         android:required="true" />
 
     <application
-
         android:name=".GameApplication"
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -24,22 +23,25 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
+
         <activity android:name=".LoginServerActivity" />
         <activity android:name=".GuessRoundActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".RoundResults" />
         <activity android:name=".DrawRoundActivity" />
         <activity android:name=".FirstRoundActivity" />
-        <activity android:name=".PictureActivity">
+        <activity android:name=".RegisterActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".PictureActivity"/>
+        <activity android:name=".UserInviteActivity"/>
+        <activity android:name=".LoginUserActivity"></activity>
     </application>
 
 </manifest>
