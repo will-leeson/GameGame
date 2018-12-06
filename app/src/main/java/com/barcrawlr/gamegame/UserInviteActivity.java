@@ -3,8 +3,8 @@ package com.barcrawlr.gamegame;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,28 +12,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.barcrawlr.gamegame.R;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
-import com.barcrawlr.gamegame.LoginUserActivity;
-import com.barcrawlr.gamegame.ListUserAdapter;
-import com.barcrawlr.gamegame.User;
-import com.barcrawlr.gamegame.SessionManager;
 import io.realm.Realm;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
-import io.realm.UserRealmProxyInterface;
 
 
 public class UserInviteActivity extends AppCompatActivity {
@@ -52,7 +41,7 @@ public class UserInviteActivity extends AppCompatActivity {
             toolbar = (Toolbar) findViewById(R.id.toolbarMain);
             searchView = (MaterialSearchView) findViewById(R.id.search_view);
 
-            setSupportActionBar(toolbar);
+           // setSupportActionBar(toolbar);
 
             realm = Realm.getDefaultInstance();
             setUpSearch();
@@ -89,8 +78,8 @@ public class UserInviteActivity extends AppCompatActivity {
                 sessionManager.logout();
                 Intent login = new Intent(UserInviteActivity.this, LoginUserActivity.class);
                 login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(login);
                 UserInviteActivity.this.finish();
+                startActivity(login);
             }else if(id == R.id.action_search){
                 //setUpSearch();
             }

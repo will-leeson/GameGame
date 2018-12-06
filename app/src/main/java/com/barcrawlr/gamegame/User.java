@@ -4,7 +4,7 @@ import io.realm.RealmObject;
 
 public class User extends RealmObject {
 
-    private static int id;
+    private  int id;
     private int newId;
 
     private String fullName;
@@ -35,7 +35,7 @@ public class User extends RealmObject {
         this.password = password;
     }
 
-    public static int getNewId() {
+    public  int getNewId() {
         return getId();
     }
 
@@ -43,7 +43,7 @@ public class User extends RealmObject {
         this.newId = newId;
     }
 
-    public static int getId() {
+    public int getId() {
         return id;
     }
 

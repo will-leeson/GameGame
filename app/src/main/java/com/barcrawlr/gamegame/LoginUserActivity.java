@@ -1,8 +1,8 @@
 package com.barcrawlr.gamegame;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -14,10 +14,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
 import io.realm.RealmResults;
-import com.barcrawlr.gamegame.MainActivity;
-import com.barcrawlr.gamegame.R;
-import com.barcrawlr.gamegame.User;
-import com.barcrawlr.gamegame.SessionManager;
 
 public class LoginUserActivity extends AppCompatActivity {
 
@@ -74,8 +70,8 @@ public class LoginUserActivity extends AppCompatActivity {
                 sessionManager.saveLoginCredenetials(user);
                 Intent main = new Intent(LoginUserActivity.this, UserInviteActivity.class);
                 main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(main);
                 LoginUserActivity.this.finish();
+                startActivity(main);
             }else{
                 Toast.makeText(LoginUserActivity.this, "username & password does not maatch!", Toast.LENGTH_SHORT).show();
             }

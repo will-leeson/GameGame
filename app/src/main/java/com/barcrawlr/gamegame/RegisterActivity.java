@@ -1,5 +1,6 @@
 package com.barcrawlr.gamegame;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,10 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.barcrawlr.gamegame.R;
-import com.barcrawlr.gamegame.User;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -28,9 +29,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     @BindView(R.id.tvList)TextView listLog;
 
+    private Random rand = new Random();
+
     private Realm realm;
     private int idUser;
-
+    private int idGenerator;
 
     @Override
     protected void onCreate(Bundle bundle){
@@ -52,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, resultUser.get(0).getFullName(), Toast.LENGTH_SHORT).show();
             }
         });
+        idGenerator = rand.nextInt(99999) + 1;
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,14 +65,26 @@ public class RegisterActivity extends AppCompatActivity {
                         password.getText().length()==0){
                     Toast.makeText(RegisterActivity.this,"fill all fields!",Toast.LENGTH_SHORT).show();
                 }else{
+                    User user = new User();
+                    User IDCheck = realm.where(User.class).equalTo("id", idGenerator).findFirst();
                     RealmResults<User> resultUser = realm.where(User.class).findAll();
+
                     //check if any user already registered
                     if(resultUser.size()>0){
                         //found users, get last userID
-                        User exist = resultUser.get(resultUser.size()-1);
-                        idUser = exist.getId()+1;
-                        Log.d("userID",String.valueOf(idUser));
-                        registerProccess(idUser);
+                        if(IDCheck!=null) {
+                            while (IDCheck!=null) {
+                                idGenerator = rand.nextInt(99999) + 1;
+                                if (IDCheck==null) {
+                                    user.setId(idGenerator);
+                                    break;
+                                }
+                            }
+                        }
+                        else{
+                            user.setId(idGenerator);
+                        }
+                        registerProccess(user.getId());
                     }else{
                         //empty users
                         idUser = 1;
@@ -90,5 +106,8 @@ public class RegisterActivity extends AppCompatActivity {
         realm.commitTransaction();
         Toast.makeText(getApplicationContext(), "register success", Toast.LENGTH_SHORT).show();
         RegisterActivity.this.finish();
+        Intent intent = new Intent(getBaseContext(), LoginUserActivity.class);
+        //intent.putExtra("Pic", );
+        startActivity(intent);
     }
 }
