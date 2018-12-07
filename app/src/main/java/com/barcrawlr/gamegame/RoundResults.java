@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import butterknife.ButterKnife;
 import io.realm.Realm;
@@ -18,7 +19,7 @@ public class RoundResults extends AppCompatActivity {
     private FloatingActionButton floatButton;
     private RecyclerView roundrecycler;
     private RoundAdapter adapter;
-    //RealmResults<Picture> results;
+    //Picture pic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +32,11 @@ public class RoundResults extends AppCompatActivity {
 
         Realm realm = Realm.getDefaultInstance();
 
+        final String id = (String) getIntent().getStringExtra("Pic");
 
-        RealmResults<Picture> results = realm.where(Picture.class).findAll();
-//        RealmResults<Picture> results = realm.where(Picture.class).equalTo("id", );
-                /*.findAllSorted("image",Sort.DESCENDING,"word",Sort.DESCENDING);*/
+        //pic = realm.where(Picture.class).equalTo("id", id).findFirst();
 
+        final RealmResults<Picture> results = realm.where(Picture.class).findAll();
 
         adapter = new RoundAdapter(results, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -48,6 +49,7 @@ public class RoundResults extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), LeaderboardActivity.class);
+                intent.putExtra("Pic",id);
                 startActivity(intent);
             }
         });

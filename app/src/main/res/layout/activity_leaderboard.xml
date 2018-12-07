@@ -24,22 +24,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:hint="Player1" />
+            android:hint="Player1"
+            android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/player2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="Player2" />
-
-        <TextView
-            android:id="@+id/player3"
-            android:layout_width="285dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="top"
-            android:hint="Player3" />
     </LinearLayout>
 
     <LinearLayout
@@ -62,32 +49,22 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:hint="Player1Score" />
+            android:hint="Player1Score"
+            android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/player2Score"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="Player2Score" />
-
-        <TextView
-            android:id="@+id/player3Score"
-            android:layout_width="285dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="top"
-            android:hint="Player3Score" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/scoresLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="116dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="52dp"
         android:layout_marginBottom="8dp"
         android:text="Scores"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/scores"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -96,12 +73,18 @@
     <TextView
         android:id="@+id/playersLabel"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="88dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Players"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/leaderboard"
+        app:layout_constraintEnd_toStartOf="@+id/scoresLabel"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />

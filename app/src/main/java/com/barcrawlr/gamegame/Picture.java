@@ -11,11 +11,11 @@ public class Picture extends RealmObject implements Serializable {
 
     @PrimaryKey
     private String id;
-    private int picId;
+   // private int picId;
     private byte[] image;
     private String word;
     private int score;
-
+    private User user;
     private Game game;
 
     public void setGame(Game game) {
@@ -34,6 +34,14 @@ public class Picture extends RealmObject implements Serializable {
 //        picId++;
 //        return picId;
 //    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getId() {
         return id;

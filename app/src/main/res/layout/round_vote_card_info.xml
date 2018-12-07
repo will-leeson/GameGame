@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         app:cardElevation="@dimen/cardview_default_elevation"
-        android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground">
 
         <RelativeLayout
