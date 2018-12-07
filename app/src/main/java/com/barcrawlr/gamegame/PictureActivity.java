@@ -129,20 +129,14 @@ public class PictureActivity extends AppCompatActivity {
                     byte[] byteArray = stream.toByteArray();
                     picture.setImage(byteArray);
 
-//                    Game gameIDCheck = realm.where(Game.class).equalTo("id", gameIdGenerator).findFirst();
                     newGameId.setId();
-
-//                    picture.setPicId();
                     picture.setId();
-
-//                    realm.copyToRealm(newGameId);
 
                     picture.setGame(newGameId);
                     realm.copyToRealm(picture);
                     finish();
 
                     Intent intent = new Intent(getBaseContext(), FirstRoundActivity.class);
-//                    intent.putExtra("Pic", picture.);
                     intent.putExtra("Pic", picture.getId());
                     startActivity(intent);
                 }

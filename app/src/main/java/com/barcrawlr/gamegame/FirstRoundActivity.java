@@ -55,7 +55,6 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
         Realm realm = Realm.getDefaultInstance();
 
         String id = (String) getIntent().getStringExtra("Pic");
-        Log.v("Picture here", id);
         pic = realm.where(Picture.class).equalTo("id", id).findFirst();
 
         final byte[] picture = pic.getImage();
@@ -85,8 +84,6 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
                 @Override
                 public void execute(Realm realm) {
 
-
-//                    Picture pic2 = new Picture();
                     BitmapDrawable image = (BitmapDrawable) choosenImage.getDrawable();
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     image.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -98,7 +95,7 @@ public class FirstRoundActivity extends AppCompatActivity implements View.OnClic
             });
 
             Intent intent =  new Intent(v.getContext(), RoundResults.class);
-
+            intent.putExtra("Pic",pic.getId());
             startActivity(intent);
         }
     }
