@@ -18,6 +18,9 @@ public class RulesPage extends AppCompatActivity {
         RulesBody = (TextView) findViewById(R.id.rules_body);
 
         RulesTitle.setText("Rules:");
-        RulesBody.setText("...");
+        RulesBody.setText(" - Correct Guess = 2 Point\n" +
+                " - Best Photo = 1 Point\n" +
+                " - Best Guess = 1 Point\n" +
+                " - An entire round correct will earn round beginner 2 points");
     }
 }
